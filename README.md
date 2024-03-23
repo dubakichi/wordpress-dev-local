@@ -1,1 +1,1 @@
-# dubakichi-blog
+# wordpress-dev-local
