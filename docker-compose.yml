@@ -27,8 +27,8 @@ services:
       WORDPRESS_DEBUG: 1
     volumes:
       - ./html:/var/www/html
-      # テーマを開発する場合は以下の行を有効にする
-      #- ./theme:/var/www/html/wp-content/themes/dev-theme
+      # テーマを開発する場合は以下の行を有効にする(以下は1階層上にtheme用リポジトリが存在する場合の例)
+      #- ../theme-XXX:/var/www/html/wp-content/themes/theme-XXX
   admin:
     image: phpmyadmin/phpmyadmin:latest
     container_name: wp_admin
