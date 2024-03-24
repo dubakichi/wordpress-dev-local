@@ -13,7 +13,7 @@ $ docker-compose up -d
 * http://localhost:2080/ で、WordPress、WordPress管理画面の確認ができます
 * http://localhost:3080/ で、phpMyAdminが確認できます
 
-# 構成
+## 構成
 
 * データベース : mysql v8.3.0
 * PHP : v8.3
