@@ -1,5 +1,5 @@
 # wordpress-dev-local
-WordPressのローカル開発環境です
+WordPressのローカル開発環境です  
 テーマをローカルで開発する時に利用することを想定しています
 
 ## 使い方
