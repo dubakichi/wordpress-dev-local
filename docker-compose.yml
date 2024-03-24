@@ -1,0 +1,38 @@
+version: "3.9"
+services:
+  db:
+    image: mysql:8.3.0
+    container_name: wp_db
+    environment:
+      MYSQL_ROOT_PASSWORD: "${WP_DEV_LOCAL_DB_ROOT_PASSWORD}"
+      MYSQL_DATABASE: "${WP_DEV_LOCAL_DB_NAME}"
+      MYSQL_USER: "${WP_DEV_LOCAL_DB_USER}"
+      MYSQL_PASSWORD: "${WP_DEV_LOCAL_DB_PASSWORD}"
+    # DBのデータを永続化する必要がない時はvolumesの定義を消す
+    volumes:
+      - ./db:/var/lib/mysql
+  web:
+    image: wordpress:6.4.3-php8.3-apache
+    platform: linux/arm64 # M1 Macでの利用を想定
+    container_name: wp_web
+    depends_on:
+      - db
+    ports:
+      - 2080:80
+    environment:
+      WORDPRESS_DB_HOST: "${WP_DEV_LOCAL_DB_HOST}"
+      WORDPRESS_DB_USER: "${WP_DEV_LOCAL_DB_USER}"
+      WORDPRESS_DB_PASSWORD: "${WP_DEV_LOCAL_DB_PASSWORD}"
+      WORDPRESS_DB_NAME: "${WP_DEV_LOCAL_DB_NAME}"
+      WORDPRESS_DEBUG: 1
+    volumes:
+      - ./html:/var/www/html
+      # テーマを開発する場合は以下の行を有効にする
+      #- ./theme:/var/www/html/wp-content/themes/dev-theme
+  admin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: wp_admin
+    depends_on:
+      - db
+    ports:
+      - 3080:80
